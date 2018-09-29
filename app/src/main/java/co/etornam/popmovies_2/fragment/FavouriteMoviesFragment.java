@@ -11,9 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.etornam.popmovies_2.R;
+import com.fxn.cue.enums.Type;
 
 import java.util.List;
 
@@ -22,6 +22,7 @@ import co.etornam.popmovies_2.adapters.FavouriteMoviesAdapter;
 import co.etornam.popmovies_2.database.FavouriteMovies;
 import co.etornam.popmovies_2.database.MovieDatabase;
 import co.etornam.popmovies_2.helper.AutoFitGridLayoutManager;
+import co.etornam.popmovies_2.utils.Toaster;
 import co.etornam.popmovies_2.viewmodel.FavouritesViewModel;
 
 /**
@@ -51,10 +52,7 @@ public class FavouriteMoviesFragment extends Fragment implements FavouriteMovies
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDatabase = MovieDatabase.getInstance(getActivity());
-        getActivity().setTitle(getString(R.string.favourite_activity_label));
-
         setupViewModels();
-        Toast.makeText(getActivity(), "All set in fragment", Toast.LENGTH_SHORT).show();
     }
 
     private void setupViewModels() {
@@ -62,7 +60,11 @@ public class FavouriteMoviesFragment extends Fragment implements FavouriteMovies
         viewModel.getFavouriteMovies().observe(this, new Observer<List<FavouriteMovies>>() {
             @Override
             public void onChanged(@Nullable List<FavouriteMovies> favouriteMovies) {
-                mAdapter.setFavouriteMoviesList(favouriteMovies);
+                if (favouriteMovies != null) {
+                    mAdapter.setFavouriteMoviesList(favouriteMovies);
+                } else {
+                    Toaster.makeToast(getActivity().getString(R.string.no_data), Type.DANGER, getActivity());
+                }
             }
         });
     }

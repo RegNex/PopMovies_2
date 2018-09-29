@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.etornam.popmovies_2.R;
+import com.fxn.cue.enums.Type;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import co.etornam.popmovies_2.database.FavouriteMovies;
+import co.etornam.popmovies_2.utils.Toaster;
 
 import static co.etornam.popmovies_2.utils.AppConstants.IMAGE_BASE_URL;
 import static co.etornam.popmovies_2.utils.AppConstants.IMAGE_SIZE;
@@ -44,9 +46,13 @@ public class FavouriteMoviesAdapter extends RecyclerView.Adapter<FavouriteMovies
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FavouriteMovies favouriteMovies = favouriteMoviesList.get(position);
-        String originalTitle = favouriteMovies.getOriginal_title();
-        String posterPath = favouriteMovies.getPoster_path();
-        holder.bind(originalTitle, posterPath);
+        if (favouriteMovies != null) {
+            String originalTitle = favouriteMovies.getOriginal_title();
+            String posterPath = favouriteMovies.getPoster_path();
+            holder.bind(originalTitle, posterPath);
+        } else {
+            Toaster.makeToast(mContext.getString(R.string.no_data), Type.DANGER, mContext);
+        }
     }
 
     @Override

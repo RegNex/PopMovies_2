@@ -43,6 +43,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 import static co.etornam.popmovies_2.utils.AppConstants.api_key;
 
 public class MainActivity extends AppCompatActivity implements MoviesAdapter.ListItemClickListener {
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
     private boolean isPopular = true;
     private int currentPage = 1;
     private Parcelable recyclerViewState;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,22 +105,29 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.sort_by_popular_action:
+                                findViewById(R.id.favourite_fragment_container).setVisibility(GONE);
+                                recyclerView.setVisibility(VISIBLE);
+                                setTitle(getString(R.string.sort_by_most_popular));
                                 loadPopularMovies();
                                 isPopular = true;
                                 return true;
                             case R.id.sort_by_rated_action:
+                                findViewById(R.id.favourite_fragment_container).setVisibility(GONE);
+                                recyclerView.setVisibility(VISIBLE);
+                                setTitle(getString(R.string.sort_by_most_rated));
                                 loadTopRatedMovies();
                                 isPopular = false;
                                 return true;
                             case R.id.view_favourites:
                                 // Create new fragment and transaction
+                                setTitle(getString(R.string.favourite_activity_label));
+                                findViewById(R.id.favourite_fragment_container).setVisibility(VISIBLE);
+                                recyclerView.setVisibility(GONE);
                                 Fragment newFragment = new FavouriteMoviesFragment();
                                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                                 transaction.replace(R.id.favourite_fragment_container, newFragment);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
-                              /*  Intent intent = new Intent(MainActivity.this, FavouriteActivity.class);
-                                startActivity(intent);*/
                         }
                         return false;
                     }
@@ -201,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0) {
-                    fab.setVisibility(View.GONE);
+                    fab.setVisibility(GONE);
                     visibleItemCount = layoutManager.getChildCount();
                     totalItemCount = layoutManager.getItemCount();
                     firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
@@ -219,9 +229,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
                         }
                     }
                 } else if (dy < 0) {
-                    fab.setVisibility(View.VISIBLE);
+                    fab.setVisibility(VISIBLE);
                 } else {
-                    fab.setVisibility(View.VISIBLE);
+                    fab.setVisibility(VISIBLE);
                 }
             }
         });
@@ -349,9 +359,9 @@ public class MainActivity extends AppCompatActivity implements MoviesAdapter.Lis
 
     private void loadProgressBar(boolean load) {
         if (load) {
-            progressBar.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(VISIBLE);
         } else {
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(GONE);
         }
     }
 }

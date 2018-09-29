@@ -19,9 +19,9 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <fragment
-        android:id="@+id/favourite_fragment_container"
+    <FrameLayout
         android:name="co.etornam.popmovies_2.fragment.FavouriteMoviesFragment"
+        android:id="@+id/favourite_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>
