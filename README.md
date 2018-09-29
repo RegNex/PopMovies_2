@@ -3,8 +3,10 @@
 PopularMovies App is an application that displays movies using themoviedb.org api. This is udacity Android developer nanodegree popularMovies stage 2
 
 ## Screenshots
-<img align="left" src="https://github.com/RegNex/PopularMovies/blob/master/ScreenShots/1.png" width="200" height="400"/>
-<img src="https://github.com/RegNex/PopularMovies/blob/master/ScreenShots/2.png" width="200" height="400"/>
+<img align="left" src="https://github.com/RegNex/PopMovies_2/blob/master/screenshots/screen_1.png" width="200" height="400"/>
+<img src="https://github.com/RegNex/PopMovies_2/blob/master/screenshots/screen_2.png" width="200" height="400"/>
+<img align="left" src="https://github.com/RegNex/PopMovies_2/blob/master/screenshots/screen_3.png" width="200" height="400"/>
+<img src="https://github.com/RegNex/PopMovies_2/blob/master/screenshots/screen_4.png" width="200" height="400"/>
 
 ## Getting Started
 
@@ -22,7 +24,7 @@ cd folder/to/clone-into/
 ```
 
 ```
-git clone https://github.com/RegNex/PopularMovies_2.git
+git clone https://github.com/RegNex/PopMovies_2.git
 ```
 
 Then 
