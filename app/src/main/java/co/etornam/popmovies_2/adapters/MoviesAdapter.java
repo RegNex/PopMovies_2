@@ -100,6 +100,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
             String imagePath = IMAGE_BASE_URL + IMAGE_SIZE + posterPath;
             Picasso.with(mContext)
                     .load(imagePath)
+                    .error(R.drawable.default_image_view)
                     .into(moviePoster);
         }
 
